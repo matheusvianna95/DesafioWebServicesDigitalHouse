@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_comicDetailFragment_to_coverDetailFragment"
             app:destination="@id/coverDetailFragment" />
+        <argument
+            android:name="publicationDate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/coverDetailFragment"

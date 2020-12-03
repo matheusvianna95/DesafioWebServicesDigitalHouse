@@ -58,13 +58,15 @@ class ComicListFragment : Fragment(), ComicListAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val clickedItem = comicResponse.data.results[position]
+
         NavHostFragment.findNavController(this).navigate(
             ComicListFragmentDirections.actionComicListFragmentToComicDetailFragment(
                 "${clickedItem.thumbnail.path}.${clickedItem.thumbnail.extension}",
                 clickedItem.title,
-                clickedItem.description,
-                clickedItem.prices.filter { i -> i.type == "printPrice" }.first().price.toFloat(),
-                clickedItem.pageCount
+                clickedItem.description ?: "No description.", // issue #700 description is null
+                clickedItem.prices.first { i -> i.type == "printPrice" }.price.toFloat(),
+                clickedItem.pageCount,
+                clickedItem.dates.first { i -> i.type == "focDate" }.date.substring(0, 10)
             )
         )
     }

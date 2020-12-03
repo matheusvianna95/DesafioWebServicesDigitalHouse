@@ -15,7 +15,7 @@ data class ComicsResponseWrapper(
     ) {
         data class Result(
             val dates: List<Date>,
-            val description: String,
+            val description: String?,
             val id: Int,
             val issueNumber: Float,
             val pageCount: Int,

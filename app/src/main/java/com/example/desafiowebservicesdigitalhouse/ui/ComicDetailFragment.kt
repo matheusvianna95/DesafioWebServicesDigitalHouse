@@ -46,6 +46,7 @@ class ComicDetailFragment : Fragment() {
         binding.comicDescription.text = comicDescriptionText
         binding.comicPrice.text = comicPriceText
         binding.pageCount.text = pageCountText
+        binding.publicationDate.text = args.publicationDate
 
         Picasso.get().load(imgUrl).fit().centerCrop().into(binding.imageBanner)
         Picasso.get().load(imgUrl).fit().centerInside().into(binding.imageCover)
