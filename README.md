@@ -1,4 +1,4 @@
-# Desafio Android Core Digital House
+# Desafio Web Services Digital House
 
 Solução do Desafio Web Services proposto durante o curso de Desenvolvimento Mobile Android da Digital House oferecido pelo programa Santander Coders.
 
