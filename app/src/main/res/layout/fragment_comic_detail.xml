@@ -7,7 +7,7 @@
     tools:context=".ui.ComicDetailFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/image_banner"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:scaleType="centerCrop"
@@ -26,16 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back_white" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintStart_toStartOf="@id/scroll_view"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:src="@drawable/spiderman_splash" />
-
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
@@ -45,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+        app:layout_constraintTop_toBottomOf="@+id/image_cover">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -145,5 +135,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/image_cover"
+        android:layout_width="140dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:background="@color/off_white"
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="@id/scroll_view"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:src="@drawable/spiderman_splash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

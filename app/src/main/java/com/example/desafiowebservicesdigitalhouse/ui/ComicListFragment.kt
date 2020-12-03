@@ -1,28 +1,72 @@
 package com.example.desafiowebservicesdigitalhouse.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.desafiowebservicesdigitalhouse.R
+import com.example.desafiowebservicesdigitalhouse.adapters.ComicListAdapter
+import com.example.desafiowebservicesdigitalhouse.api.MarvelComicsService
+import com.example.desafiowebservicesdigitalhouse.data.ComicsResponseWrapper
+import com.example.desafiowebservicesdigitalhouse.databinding.FragmentComicListBinding
+import com.example.desafiowebservicesdigitalhouse.viewmodels.ComicListViewModel
 
-class ComicListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ComicListFragment : Fragment(), ComicListAdapter.OnItemClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private val viewModel: ComicListViewModel by viewModels() {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return ComicListViewModel(MarvelComicsService.create()) as T
+            }
+        }
     }
+
+    private lateinit var binding: FragmentComicListBinding
+    private lateinit var comicResponse: ComicsResponseWrapper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comic_list, container, false)
+    ): View {
+        binding = FragmentComicListBinding.inflate(inflater, container, false)
+
+        val comicAdapter = ComicListAdapter(null, this)
+        val recyclerView = binding.recyclerComicList
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.adapter = comicAdapter
+
+
+        viewModel.comicList.observe(viewLifecycleOwner) {
+            Log.i("ComicList", it.toString())
+            comicResponse = it
+            comicAdapter.comicResponse = comicResponse
+            recyclerView.adapter = comicAdapter
+        }
+
+        viewModel.getSpiderManComics()
+
+        return binding.root
+    }
+
+    override fun onItemClick(position: Int) {
+        val clickedItem = comicResponse.data.results[position]
+        NavHostFragment.findNavController(this).navigate(
+            ComicListFragmentDirections.actionComicListFragmentToComicDetailFragment(
+                "${clickedItem.thumbnail.path}.${clickedItem.thumbnail.extension}",
+                clickedItem.title,
+                clickedItem.description,
+                clickedItem.prices.filter { i -> i.type == "printPrice" }.first().price.toFloat(),
+                clickedItem.pageCount
+            )
+        )
     }
 
 }

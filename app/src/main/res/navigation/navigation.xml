@@ -13,12 +13,16 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
             app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
             app:popExitAnim="@anim/slide_out_bottom" />
         <action
             android:id="@+id/action_loginFragment_to_comicListFragment"
             app:destination="@id/comicListFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -29,11 +33,54 @@
             android:id="@+id/action_registerFragment_to_comicListFragment"
             app:destination="@id/comicListFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/comicListFragment"
         android:name="com.example.desafiowebservicesdigitalhouse.ui.ComicListFragment"
         android:label="fragment_comic_list"
-        tools:layout="@layout/fragment_comic_list" />
+        tools:layout="@layout/fragment_comic_list" >
+        <action
+            android:id="@+id/action_comicListFragment_to_comicDetailFragment"
+            app:destination="@id/comicDetailFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicDetailFragment"
+        android:name="com.example.desafiowebservicesdigitalhouse.ui.ComicDetailFragment"
+        android:label="fragment_comic_detail"
+        tools:layout="@layout/fragment_comic_detail" >
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+        <argument
+            android:name="comicTitle"
+            app:argType="string" />
+        <argument
+            android:name="comicDescription"
+            app:argType="string" />
+        <argument
+            android:name="comicPrice"
+            app:argType="float" />
+        <argument
+            android:name="pageCount"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_comicDetailFragment_to_coverDetailFragment"
+            app:destination="@id/coverDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coverDetailFragment"
+        android:name="com.example.desafiowebservicesdigitalhouse.ui.CoverDetailFragment"
+        android:label="fragment_cover_detail"
+        tools:layout="@layout/fragment_cover_detail" >
+        <argument
+            android:name="imgUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>
