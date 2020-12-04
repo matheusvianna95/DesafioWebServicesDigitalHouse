@@ -59,6 +59,7 @@ class ComicListFragment : Fragment(), ComicListAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         val clickedItem = comicResponse.data.results[position]
 
+        // Decided to keep passing data both as Serializable object and individually for future reference
         NavHostFragment.findNavController(this).navigate(
             ComicListFragmentDirections.actionComicListFragmentToComicDetailFragment(
                 "${clickedItem.thumbnail.path}.${clickedItem.thumbnail.extension}",
@@ -66,7 +67,8 @@ class ComicListFragment : Fragment(), ComicListAdapter.OnItemClickListener {
                 clickedItem.description ?: "No description.", // issue #700 description is null
                 clickedItem.prices.first { i -> i.type == "printPrice" }.price.toFloat(),
                 clickedItem.pageCount,
-                clickedItem.dates.first { i -> i.type == "focDate" }.date.substring(0, 10)
+                clickedItem.dates.first { i -> i.type == "focDate" }.date.substring(0, 10),
+                clickedItem
             )
         )
     }

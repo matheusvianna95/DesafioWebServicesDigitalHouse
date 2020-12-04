@@ -1,8 +1,13 @@
 package com.example.desafiowebservicesdigitalhouse.data
 
-
-import com.google.gson.annotations.SerializedName
-
+/**
+ * Data class that represents a response from Marvel Comics API fetching a list of characters
+ * matching query parameters.
+ *
+ * Currently this class is not being used, nevertheless, it was included in the project in case new
+ * features (such a querying by character) are added in the future.
+ *
+ */
 data class CharactersResponseWrapper(
     val `data`: Data,
 ) {

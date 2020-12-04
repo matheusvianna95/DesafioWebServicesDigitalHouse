@@ -19,6 +19,7 @@ private const val TS = "3"
  */
 interface MarvelComicsService {
 
+    // Querying by characters feature not yet implemented
     @GET("characters")
     suspend fun getCharacterData(
         @Query("name") nameStartsWith: String = "Spider-Man",

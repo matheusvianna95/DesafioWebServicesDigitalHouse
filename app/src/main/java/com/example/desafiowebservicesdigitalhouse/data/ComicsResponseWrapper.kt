@@ -2,7 +2,14 @@ package com.example.desafiowebservicesdigitalhouse.data
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
+
+/**
+ * Data class that represents a response from Marvel Comics API fetching a list of comics from a
+ * specific character.
+ *
+ */
 data class ComicsResponseWrapper(
     val `data`: Data,
 ) {
@@ -22,7 +29,7 @@ data class ComicsResponseWrapper(
             val prices: List<Price>,
             val thumbnail: Thumbnail,
             val title: String,
-        ) {
+        ) : Serializable {
 
             data class Date(
                 val date: String,

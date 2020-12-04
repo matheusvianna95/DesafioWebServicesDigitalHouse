@@ -24,11 +24,14 @@ class ComicDetailFragment : Fragment() {
         binding = FragmentComicDetailBinding.inflate(inflater, container, false)
 
         val navController = findNavController()
-        val comicTitleText = args.comicTitle
-        val comicDescriptionText = args.comicDescription
-        val comicPriceText = "$${args.comicPrice}"
-        val pageCountText = args.pageCount.toString()
-        val imgUrl = args.imgUrl
+
+        // Comments represent the parameters being passed individually
+        val comicTitleText = args.comicResponseResult.title //args.comicTitle
+        val comicDescriptionText = args.comicResponseResult.description //args.comicDescription
+        val comicPriceText = "$${args.comicResponseResult.prices.first { i -> i.type == "printPrice" }.price.toFloat()}" //"$${args.comicPrice}"
+        val pageCountText = args.comicResponseResult.pageCount.toString() //args.pageCount.toString()
+        val imgUrl = "${args.comicResponseResult.thumbnail.path}.${args.comicResponseResult.thumbnail.extension}" //args.imgUrl
+        val publicationDate = args.comicResponseResult.dates.first { i -> i.type == "focDate" }.date.substring(0, 10) //args.publicationDate
 
         binding.toolbar.setNavigationOnClickListener {
             navController.navigateUp()
@@ -46,9 +49,12 @@ class ComicDetailFragment : Fragment() {
         binding.comicDescription.text = comicDescriptionText
         binding.comicPrice.text = comicPriceText
         binding.pageCount.text = pageCountText
-        binding.publicationDate.text = args.publicationDate
+        binding.publicationDate.text = publicationDate
 
+        // Loads banner image
         Picasso.get().load(imgUrl).fit().centerCrop().into(binding.imageBanner)
+
+        //Loads cover image
         Picasso.get().load(imgUrl).fit().centerInside().into(binding.imageCover)
 
         return binding.root

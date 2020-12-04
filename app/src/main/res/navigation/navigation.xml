@@ -76,6 +76,9 @@
         <argument
             android:name="publicationDate"
             app:argType="string" />
+        <argument
+            android:name="comicResponseResult"
+            app:argType="com.example.desafiowebservicesdigitalhouse.data.ComicsResponseWrapper$Data$Result" />
     </fragment>
     <fragment
         android:id="@+id/coverDetailFragment"
